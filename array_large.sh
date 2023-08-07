@@ -3,25 +3,17 @@
 declare -a array
 array=(10 14 9)
 
-# função que acha o maior número e verifica se é par ou ímpar
-maior() {
-    numero="${array[0]}"
-    status=""
-
-    for i in "${array[@]}"; do 
-        if (( i % 2 == 0 )); then
-            status="par"
-        else 
-            status="ímpar"
-        fi 
-
-        if [ "$i" -gt "$numero" ]; then 
-            numero="$i" 
-        fi 
-    done
-
-    echo "Status: $status"
-    echo "$numero"
+# função que verifica se um número é par
+is_par() {
+    if (( $1 % 2 == 0 )); then
+        return 0 # Verdadeiro (é par)
+    else
+        return 1 # Falso (não é par)
+    fi
 }
 
-maior
+# Verifica se o número 14 é o maior e é par
+if [ "${array[1]}" -eq 14 ] && is_par "${array[1]}"; then
+    echo "O número 14 é par no array."
+fi
+
